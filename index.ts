@@ -5,17 +5,23 @@ import './style.css';
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>Alphabet Subsequence</h1>`;
 function alphabetSubsequence(s: string): boolean {
-  const alphabets = "abcdefghijklmnopqrstuvwxyz";
-  let arr = s.split('');
-  for (let i = 0; i < arr.length; i++) {
-    if(alphabets.indexOf(arr[i]) < (alphabets.indexOf(arr[i])+1)){
-          console.log(arr[i]);
+  const charsArray = [];
+  s.split('').forEach((char: string) => {
+    charsArray.push(char.charCodeAt(0));
+  });
+  if (new Set(charsArray).size !== charsArray.length) {
+    return false;
+  }
+
+  for (let j = 0; j < charsArray.length; j++) {
+    if (charsArray[j] >= charsArray[j + 1]) {
+      return false;
     }
   }
+  return true;
 }
 
-console.log(alphabetSubsequence('zab'))
-/* console.log(alphabetSubsequence('effg'))
+console.log(alphabetSubsequence('effg'))
 console.log(alphabetSubsequence('cdce'))
 console.log(alphabetSubsequence('ace'))
-console.log(alphabetSubsequence('bxz')) */
+console.log(alphabetSubsequence('bxz'))
